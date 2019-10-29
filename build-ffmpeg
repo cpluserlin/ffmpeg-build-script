@@ -10,7 +10,7 @@ CC=clang
 LDFLAGS="-L${WORKSPACE}/lib -lm"
 CFLAGS="-I${WORKSPACE}/include"
 PKG_CONFIG_PATH="${WORKSPACE}/lib/pkgconfig"
-ADDITIONAL_CONFIGURE_OPTIONS=""
+ADDITIONAL_CONFIGURE_OPTIONS="--enable-debug=1 --disable-optimizations --disable-stripping"
 
 # Speed up the process
 # Env Var NUMJOBS overrides automatic detection
@@ -378,7 +378,7 @@ cd $PACKAGES/ffmpeg-4.2.1/ || exit
     --extra-ldflags="-L$WORKSPACE/lib" \
     --extra-libs="-lpthread -lm -llzma" \
 	--enable-static \
-	--disable-debug \
+#	--disable-debug \
 	--disable-shared \
 	--disable-ffplay \
 	--disable-doc \
@@ -403,6 +403,7 @@ cd $PACKAGES/ffmpeg-4.2.1/ || exit
 	--enable-libvidstab \
 	--enable-libaom
 
+execute make clean	
 execute make -j $MJOBS
 execute make install
 
