@@ -368,15 +368,15 @@ if build "openssl"; then
 fi
 
 build "ffmpeg"
-download "https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/6023b9fbfef02b71f6acfb1b09e5a12fe9d276e2.tar.gz" "ffmpeg-snapshot.tar.bz2"
-cd $PACKAGES/ffmpeg-6023b9f/ || exit
+download "https://ffmpeg.org/releases/ffmpeg-4.2.1.tar.bz2" "ffmpeg-snapshot.tar.bz2"
+cd $PACKAGES/ffmpeg-4.2.1/ || exit
 ./configure $ADDITIONAL_CONFIGURE_OPTIONS \
     --pkgconfigdir="$WORKSPACE/lib/pkgconfig" \
     --prefix=${WORKSPACE} \
     --pkg-config-flags="--static" \
     --extra-cflags="-I$WORKSPACE/include" \
     --extra-ldflags="-L$WORKSPACE/lib" \
-    --extra-libs="-lpthread -lm" \
+    --extra-libs="-lpthread -lm -llzma" \
 	--enable-static \
 	--disable-debug \
 	--disable-shared \
@@ -393,7 +393,7 @@ cd $PACKAGES/ffmpeg-6023b9f/ || exit
 	--enable-libtheora \
 	--enable-libvorbis \
 	--enable-libx264 \
-	--enable-libx265 \
+#	--enable-libx265 \
 	--enable-runtime-cpudetect \
 	--enable-libfdk-aac \
 	--enable-avfilter \
