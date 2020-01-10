@@ -369,8 +369,13 @@ fi
 
 build "ffmpeg"
 
-download "https://github.com/cpluserlin/FFmpeg/archive/master.zip" "ffmpeg-snapshot.tar.bz2"
-cd $PACKAGES/FFmpeg-master/ || exit
+FFMPEG_SOURCE_CODE=$PACKAGES/FFmpeg-master/
+if [ -d $FFMPEG_SOURCE_CODE ]
+then echo "$FFMPEG_SOURCE_CODE exist"
+else
+    download "https://github.com/cpluserlin/FFmpeg/archive/master.zip" "ffmpeg-snapshot.tar.bz2"
+fi
+cd $FFMPEG_SOURCE_CODE || exit
 ./configure $ADDITIONAL_CONFIGURE_OPTIONS \
     --pkgconfigdir="$WORKSPACE/lib/pkgconfig" \
     --prefix=${WORKSPACE} \
